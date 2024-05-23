@@ -1,8 +1,7 @@
 ## About
 
-Real Time Messaging application for learning purposes. Based on tutor video from the best tutorial YT channel
-<img src="https://yt3.ggpht.com/ytc/AIdro_limu16Q9lMj8k4k_ACSqUXKHZYsJothlIQl1qrzMFw7TE=s88-c-k-c0x00ffffff-no-rj" title="The Codeholic YT channel" width="40"/>
-"[The Codeholic](https://www.youtube.com/@TheCodeholic)"
+Real Time Messaging application for learning purposes. Based on tutor video from the best Laravel tutorials YT Channel
+**_[The Codeholic](https://www.youtube.com/@TheCodeholic)_**.
 
 ## Installing kit and dependencies
 
@@ -21,6 +20,19 @@ _Adding extra packages_:
 _Install laravel broadcasting server with Laravel Reverb and Node dependencies_ (hit yes when asked):
 * `php artisan install:broadcasting`
 
+### App Models & Migrations:
+* `php artisan make:model Group -m`
+* `php artisan make:model Conversation -m`
+* `php artisan make:model Message -m`
+* `php artisan make:model MessageAttachment -m`
+
+### App Factories and seeders
+* `php artisan make:factory GroupFactory`
+* `php artisan make:factory MessageFactory`
+
+_Run migrations and DB seeders:_
+* `php artisan migrate:fresh --seed`
+
 ### Optional. Add IDE Helper Generator for Laravel
 Run commands:
 * `php artisan cache:clear`
@@ -34,13 +46,3 @@ You can now re-generate the docs yourself (for future updates):
 
 Note: _bootstrap/compiled.php_ has to be cleared first, so run `php artisan clear-compiled` before generating.
 Read full docs at [Barry vd. Heuvel GitHub repo](https://github.com/barryvdh/laravel-ide-helper)
-
-### App Models & Migrations:
-* `php artisan make:model Group -m`
-* `php artisan make:model Conversation -m`
-* `php artisan make:model Message -m`
-* `php artisan make:model MessageAttachment -m`
-
-### App Factories and seeders
-* `php artisan make:factory GroupFactory`
-* `php artisan make:factory MessageFactory`
