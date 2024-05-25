@@ -33,7 +33,18 @@ _Install laravel broadcasting server with Laravel Reverb and Node dependencies_ 
 _Run migrations and DB seeders:_
 * `php artisan migrate:fresh --seed`
 
-### Optional. Add IDE Helper Generator for Laravel
+### App Controllers:
+* `php artisan make:controller HomeController`
+
+### Model Resources:
+* `php artisan make:resource UserResource`
+
+### Other stuff
+
+To start Laravel Reverb server run:
+`php artisan reverb:start --debug`
+
+**_Optional_**. Add IDE Helper Generator for Laravel
 Run commands:
 * `php artisan cache:clear`
 * `composer require --dev barryvdh/laravel-ide-helper`
