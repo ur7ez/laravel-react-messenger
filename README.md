@@ -35,9 +35,17 @@ _Run migrations and DB seeders:_
 
 ### App Controllers:
 * `php artisan make:controller HomeController`
+* `php artisan make:controller MessageController`
 
 ### Model Resources:
 * `php artisan make:resource UserResource`
+* `php artisan make:resource MessageResource`
+
+### Model Request classes:
+* `php artisan make:request StoreMessageRequest`
+
+### make Event to push information to browser:
+* `php artisan make:event SocketMessage`
 
 ### Other stuff
 
