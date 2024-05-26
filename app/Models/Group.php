@@ -7,7 +7,36 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
+/**
+ *
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $description
+ * @property int $owner_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $last_message_id
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Message> $messages
+ * @property-read int|null $messages_count
+ * @property-read \App\Models\User $owner
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
+ * @property-read int|null $users_count
+ * @method static \Database\Factories\GroupFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Group newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Group newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Group query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereLastMessageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereOwnerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Group extends Model
 {
     use HasFactory;
@@ -19,7 +48,7 @@ class Group extends Model
         'last_message_id',
     ];
 
-    public static function getGroupsForUser(User $user)
+    public static function getGroupsForUser(User $user): Collection
     {
         $query = self::select([
             'groups.*',
@@ -33,6 +62,15 @@ class Group extends Model
             ->orderBy('groups.name');
 
         return $query->get();
+    }
+
+    public static function updateGroupWithMessage($groupId, $message): Model|Group
+    {
+        // Create or update group with received group id and message
+        return self::updateOrCreate(
+            ['id' => $groupId], // search condition
+            ['last_message_id' => $message->id]  // values to update
+        );
     }
 
     public function toConversationArray(): array
