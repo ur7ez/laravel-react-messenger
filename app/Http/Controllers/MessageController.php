@@ -10,7 +10,6 @@ use App\Models\Group;
 use App\Models\Message;
 use App\Models\MessageAttachment;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
@@ -35,7 +34,7 @@ class MessageController extends Controller
     {
         $messages = Message::where('group_id', $group->id)
             ->latest()
-            ->paginate(50);
+            ->paginate(10);
         return inertia('Home', [
             'selectedConversation' => $group->toConversationArray(),
             'message' => MessageResource::collection($messages),
@@ -64,7 +63,7 @@ class MessageController extends Controller
         return MessageResource::collection($messages);
     }
 
-    public function store(StoreMessageRequest $request)
+    public function store(StoreMessageRequest $request): MessageResource
     {
         $data = $request->validated();
         $data['sender_id'] = auth()->id();
@@ -97,7 +96,7 @@ class MessageController extends Controller
             Conversation::updateConversationWithMessage($receiverId, auth()->id(), $message);
         }
         if ($groupId) {
-            Conversation::updateGroupWithMessage($groupId, $message);
+            Group::updateGroupWithMessage($groupId, $message);
         }
 
         SocketMessage::dispatch($message);
@@ -111,7 +110,8 @@ class MessageController extends Controller
             return response()->json(['message' => 'Forbidden'], 403);
         }
         $message->delete();
-
+        // TODO: delete all the message attachments present in the file system
+        // TODO: update last_message_id from the group and from the conversation (if the message being deleted is the last message)
         return response('', 204);
     }
 }
