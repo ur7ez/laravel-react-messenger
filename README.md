@@ -40,12 +40,17 @@ _Run migrations and DB seeders:_
 ### Model Resources:
 * `php artisan make:resource UserResource`
 * `php artisan make:resource MessageResource`
+* `php artisan make:resource MessageAttachmentResource`
 
 ### Model Request classes:
 * `php artisan make:request StoreMessageRequest`
 
 ### make Event to push information to browser:
 * `php artisan make:event SocketMessage`
+
+
+### make Observers for offline jobs:
+* `php artisan make:observer MessageObserver`
 
 ### Other stuff
 
@@ -62,6 +67,7 @@ Then add PHPStorm Meta file:
 
 You can now re-generate the docs yourself (for future updates):
 * `php artisan ide-helper:generate`
+* `php artisan ide-helper:models [-W]`
 
 Note: _bootstrap/compiled.php_ has to be cleared first, so run `php artisan clear-compiled` before generating.
 Read full docs at [Barry vd. Heuvel GitHub repo](https://github.com/barryvdh/laravel-ide-helper)
