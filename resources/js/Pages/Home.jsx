@@ -5,10 +5,22 @@ import ChatLayout from "@/Layouts/ChatLayout";
 import MessageItem from "@/Components/App/MessageItem";
 import MessageInput from "@/Components/App/MessageInput";
 import ConversationHeader from "@/Components/App/ConversationHeader";
+import {useEventBus} from "@/EventBus";
 
 function Home({selectedConversation = null, messages = null}) {
     const [localMessages, setLocalMessages] = useState([]);
     const messagesCtrRef = useRef(null);
+    const {on} = useEventBus();
+    const messageCreated = (message) => {
+        if (
+            selectedConversation
+            && selectedConversation.is_group
+            && selectedConversation.id === message.group_id
+        ) {
+            // new message received inside a group
+            setLocalMessages(message);
+        }
+    };
 
     useEffect(() => {
         setTimeout(() => {
@@ -16,6 +28,11 @@ function Home({selectedConversation = null, messages = null}) {
                 messagesCtrRef.current.scrollTop = messagesCtrRef.current.scrollHeight;
             }
         }, 10);
+
+        const offCreated = on("message.created", messageCreated);
+        return () => {
+            offCreated();
+        }
     }, [selectedConversation]);
 
     useEffect(() => {
@@ -56,7 +73,7 @@ function Home({selectedConversation = null, messages = null}) {
                             </div>
                         )}
                     </div>
-                    <MessageInput conversation={selectedConversation} />
+                    <MessageInput conversation={selectedConversation}/>
                 </>
             )}
         </>
