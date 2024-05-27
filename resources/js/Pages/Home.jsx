@@ -15,10 +15,19 @@ function Home({selectedConversation = null, messages = null}) {
         if (
             selectedConversation
             && selectedConversation.is_group
-            && selectedConversation.id === message.group_id
+            && selectedConversation.id == message.group_id
         ) {
             // new message received inside a group
-            setLocalMessages(message);
+            setLocalMessages((prevMessages) => [...prevMessages, message]);
+        }
+        if (
+            selectedConversation
+            && selectedConversation.is_user
+            && (selectedConversation.id == message.sender_id
+            || selectedConversation.id == message.receiver_id)
+        ) {
+            // new message received in user-to-user conversation
+            setLocalMessages((prevMessages) => [...prevMessages, message]);
         }
     };
 
