@@ -41,7 +41,7 @@ class MessageController extends Controller
         ]);
     }
 
-    public function loadOlder(Message $message): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function loadOlder(Message $message)
     {
         // Load older messages that are older that the given message, sort them by the latest
         if ($message->group_id) {
