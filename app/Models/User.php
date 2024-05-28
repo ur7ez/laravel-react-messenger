@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -114,7 +114,7 @@ class User extends Authenticatable
             'updated_at' => $this->updated_at,
             'blocked_at' => $this->blocked_at,
             'last_message' => $this->last_message,
-            'last_message_date' => $this->last_message_date,
+            'last_message_date' => $this->last_message_date ? ($this->last_message_date . ' UTC') : null,
         ];
     }
 
