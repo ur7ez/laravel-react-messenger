@@ -15,7 +15,8 @@ _Add Laravel Breeze with React component_:
 * `npm install`
 
 _Adding extra packages_:
-* `npm install @headlessui/react @heroicons/react daisyui emoji-picker-react react-markdown uuid`
+* `npm install @headlessui/react @heroicons/react emoji-picker-react react-markdown uuid`
+* `npm install -D daisyui`
 
 _Install laravel broadcasting server with Laravel Reverb and Node dependencies_ (hit yes when asked):
 * `php artisan install:broadcasting`
