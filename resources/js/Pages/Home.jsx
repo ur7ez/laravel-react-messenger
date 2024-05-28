@@ -66,7 +66,6 @@ function Home({selectedConversation = null, messages = null}) {
     }, [localMessages]);
 
     useEffect(() => {
-        setNoMoreMessages(false); // init when another conversation is selected
         setTimeout(() => {
             if (messagesCtrRef.current) {
                 messagesCtrRef.current.scrollTop = messagesCtrRef.current.scrollHeight;
@@ -74,6 +73,8 @@ function Home({selectedConversation = null, messages = null}) {
         }, 10);
 
         const offCreated = on("message.created", messageCreated);
+        setScrollFromBottom(0);
+        setNoMoreMessages(false); // init when another conversation is selected
         return () => {
             offCreated();
         }
