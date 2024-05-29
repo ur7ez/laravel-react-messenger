@@ -105,7 +105,7 @@ export default function AttachmentPreviewModal({
                                     )}
 
                                     {attachment && (
-                                        <div className="flex items-center justify-center w-full h-full p-3">
+                                        <div className="flex items-center justify-center w-full h-full p-3" title={attachment.name}>
                                             {isImage(attachment) && (
                                                 <img
                                                     src={attachment.url}

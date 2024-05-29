@@ -78,7 +78,7 @@ class MessageController extends Controller
             foreach ($files as $file) {
                 /* @var UploadedFile $file */
                 $directory = 'attachments/' . Str::random(32);
-                Storage::makeDirectory($directory);
+                Storage::disk('public')->makeDirectory($directory);
                 $model = [
                     'message_id' => $message->id,
                     'name' => $file->getClientOriginalName(),

@@ -21,6 +21,9 @@ _Adding extra packages_:
 _Install laravel broadcasting server with Laravel Reverb and Node dependencies_ (hit yes when asked):
 * `php artisan install:broadcasting`
 
+_Set link to public storage_:
+* `php artisan storage:link`
+
 ### App Models & Migrations:
 * `php artisan make:model Group -m`
 * `php artisan make:model Conversation -m`

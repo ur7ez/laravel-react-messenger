@@ -32,7 +32,6 @@ export default function Authenticated({header, children}) {
                     console.log(error);
                 })
                 .listen("SocketMessage", (e) => {
-                    console.log("SocketMessage", e);
                     const message = e.message;
                     // if the conversation with the sender is not selected, then show a notification
 

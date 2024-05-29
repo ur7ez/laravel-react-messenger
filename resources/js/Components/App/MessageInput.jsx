@@ -39,18 +39,18 @@ const MessageInput = ({conversation = null}) => {
         if (messageSending) {
             return;
         }
-        if (newMessage.trim() === '') {
+        if (newMessage.trim() === '' && chosenFiles.length === 0) {
             setInputErrorMessage("Please provide a message or upload attachment(s)");
             setTimeout(() => {
                 setInputErrorMessage('');
             }, 3000);
             return;
         }
+        const formData = new FormData();
         // handle files if any
         chosenFiles.forEach((file) => {
             formData.append("attachments[]", file.file);
         });
-        const formData = new FormData();
         formData.append("message", newMessage);
         if (conversation.is_user) {
             formData.append("receiver_id", conversation.id);
