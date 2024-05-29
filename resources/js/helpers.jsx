@@ -51,7 +51,7 @@ export const isToday = (date) => {
         date.getMonth() === today.getMonth() &&
         date.getFullYear() === today.getFullYear()
     );
-}
+};
 
 export const isYesterday = (date) => {
     const yesterday = new Date();
@@ -61,4 +61,46 @@ export const isYesterday = (date) => {
         date.getMonth() === yesterday.getMonth() &&
         date.getFullYear() === yesterday.getFullYear()
     );
+};
+
+export const isImage = (file) => {
+    let mime = file.mime || file.type;
+    mime = mime.split("/");
+    return mime[0].toLowerCase() === "image";
+};
+export const isVideo = (file) => {
+    let mime = file.mime || file.type;
+    mime = mime.split("/");
+    return mime[0].toLowerCase() === "video";
+};
+export const isAudio = (file) => {
+    let mime = file.mime || file.type;
+    mime = mime.split("/");
+    return mime[0].toLowerCase() === "audio";
+};
+export const isPDF = (file) => {
+    let mime = file.mime || file.type;
+    return mime === "application/pdf";
 }
+
+export const isPreviewable = (file) => {
+    return (
+        isImage(file)
+        || isVideo(file)
+        || isAudio(file)
+        || isPDF(file)
+    );
+};
+export const formatBytes = (bytes, decimals = 2) => {
+    if (bytes === 0) return "0 Bytes";
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ["Bytes", "KB", "MB", "GB"];
+
+    let i = 0;
+    let size = bytes;
+    while (size >= k) {
+        size /= k; i++;
+    }
+    return parseFloat(size.toFixed(dm)) + " " + sizes[i];
+};
