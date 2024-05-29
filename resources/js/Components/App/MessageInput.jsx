@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {
     PaperClipIcon,
     PhotoIcon,
@@ -20,6 +20,9 @@ const MessageInput = ({conversation = null}) => {
     const [messageSending, setMessageSending] = useState(false);
     const [chosenFiles, setChosenFiles] = useState([]);
     const [uploadProgress, setUploadProgress] = useState(0);
+
+    const imagesInput = useRef(null);
+    const filesInput = useRef(null);
 
     const onFileChange = (ev) => {
         const files = ev.target.files;
@@ -47,11 +50,11 @@ const MessageInput = ({conversation = null}) => {
             return;
         }
         const formData = new FormData();
+        formData.append("message", newMessage);
         // handle files if any
         chosenFiles.forEach((file) => {
             formData.append("attachments[]", file.file);
         });
-        formData.append("message", newMessage);
         if (conversation.is_user) {
             formData.append("receiver_id", conversation.id);
         } else if (conversation.is_group) {
@@ -71,6 +74,13 @@ const MessageInput = ({conversation = null}) => {
                 setMessageSending(false);
                 setUploadProgress(0);
                 setChosenFiles([]);
+                // Clear the file inputs
+                if (filesInput.current) {
+                    filesInput.current.value = '';
+                }
+                if (imagesInput.current) {
+                    imagesInput.current.value = '';
+                }
             })
             .catch((err) => {
                 setMessageSending(false);
@@ -105,6 +115,7 @@ const MessageInput = ({conversation = null}) => {
                         type="file"
                         multiple
                         onChange={onFileChange}
+                        ref={filesInput}
                         className="absolute left-0 top-0 right-0 bottom-0 z-20 opacity-0 cursor-pointer"
                     />
                 </button>
@@ -114,6 +125,7 @@ const MessageInput = ({conversation = null}) => {
                         type="file"
                         multiple
                         onChange={onFileChange}
+                        ref={imagesInput}
                         accept="image/*"
                         className="absolute left-0 top-0 right-0 bottom-0 z-20 opacity-0 cursor-pointer"
                     />
@@ -153,9 +165,10 @@ const MessageInput = ({conversation = null}) => {
                         <div
                             key={file.file.name}
                             className={
-                                `relative flex justify-between cursor-pointer ` +
+                                `relative flex justify-between cursor-pointer` +
                                 (!isImage(file.file) ? " w-[240px]" : "")
                             }
+                            title={file.file.name}
                         >
                             {isImage(file.file) && (
                                 <img
