@@ -41,7 +41,7 @@ const MessageAttachments = ({attachments, attachmentClick}) => {
                             )}
                             {isAudio(attachment) && (
                                 <div className="relative flex justify-center items-center">
-                                    <audio src={attachment.url} controls/>
+                                    <audio id={'audio-' + attachment.id} src={attachment.url} controls/>
                                 </div>
                             )}
                             {isPDF(attachment) && (
