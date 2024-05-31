@@ -3,6 +3,7 @@ import UserAvatar from "@/Components/App/UserAvatar";
 import ReactMarkdown from "react-markdown";
 import {formatMessageDateLong} from "@/helpers";
 import MessageAttachments from "@/Components/App/MessageAttachments";
+import MessageOptionsDropdown from "@/Components/App/MessageOptionsDropdown";
 
 const MessageItem = ({message, attachmentClick}) => {
     const currentUser = usePage().props.auth.user;
@@ -30,6 +31,9 @@ const MessageItem = ({message, attachmentClick}) => {
                     (message.sender_id === currentUser.id ? "chat-bubble-info" : "")
                 }
             >
+                {message.sender_id == currentUser.id && (
+                    <MessageOptionsDropdown message={message}/>
+                )}
                 <div className="chat-message">
                     <div className="chat-message-content">
                         <ReactMarkdown>{message.message}</ReactMarkdown>

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Observers\MessageObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -38,6 +40,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereUpdatedAt($value)
  * @mixin \Eloquent
  */
+#[ObservedBy([MessageObserver::class])]
 class Message extends Model
 {
     use HasFactory;
