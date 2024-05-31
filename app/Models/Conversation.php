@@ -14,9 +14,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $last_message_id
- * @property-read \App\Models\Message|null $lastMessage
- * @property-read \App\Models\User $user1
- * @property-read \App\Models\User $user2
+ * @property-read Message|null $lastMessage
+ * @property-read User $user1
+ * @property-read User $user2
  * @method static \Illuminate\Database\Eloquent\Builder|Conversation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Conversation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Conversation query()

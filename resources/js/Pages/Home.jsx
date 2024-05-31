@@ -44,6 +44,30 @@ function Home({selectedConversation = null, messages = null}) {
         }
     };
 
+    const messageDeleted = ({message}) => {
+        if (
+            selectedConversation
+            && selectedConversation.is_group
+            && selectedConversation.id == message.group_id
+        ) {
+            // new message received inside a group
+            setLocalMessages((prevMessages) => {
+                return prevMessages.filter((m) => m.id !== message.id);
+            });
+        }
+        if (
+            selectedConversation
+            && selectedConversation.is_user
+            && (selectedConversation.id == message.sender_id
+                || selectedConversation.id == message.receiver_id)
+        ) {
+            // new message received in user-to-user conversation
+            setLocalMessages((prevMessages) => {
+                return prevMessages.filter((m) => m.id !== message.id);
+            });
+        }
+    };
+
     const loadMoreMessages = useCallback(() => {
         if (noMoreMessagesRef.current) {
             return;
@@ -89,10 +113,13 @@ function Home({selectedConversation = null, messages = null}) {
         }, 10);
 
         const offCreated = on("message.created", messageCreated);
+        const offDeleted = on("message.deleted", messageDeleted);
+
         setScrollFromBottom(0);
         setNoMoreMessages(false); // init when another conversation is selected
         return () => {
             offCreated();
+            offDeleted();
         }
     }, [selectedConversation]);
 

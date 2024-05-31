@@ -19,10 +19,11 @@ use Illuminate\Support\Collection;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $last_message_id
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Message> $messages
+ * @property-read Message|null $lastMessage
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Message> $messages
  * @property-read int|null $messages_count
- * @property-read \App\Models\User $owner
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
+ * @property-read User $owner
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
  * @method static \Database\Factories\GroupFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Group newModelQuery()
@@ -104,5 +105,10 @@ class Group extends Model
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function lastMessage(): BelongsTo
+    {
+        return $this->belongsTo(Message::class, 'last_message_id');
     }
 }
