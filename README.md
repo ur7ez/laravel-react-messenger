@@ -40,21 +40,25 @@ _Run migrations and DB seeders:_
 ### App Controllers:
 * `php artisan make:controller HomeController`
 * `php artisan make:controller MessageController`
+* `php artisan make:controller GroupController --requests --resource --model=Group`
 
 ### Model Resources:
 * `php artisan make:resource UserResource`
 * `php artisan make:resource MessageResource`
 * `php artisan make:resource MessageAttachmentResource`
+* `php artisan make:resource GroupResource`
 
 ### Model Request classes:
 * `php artisan make:request StoreMessageRequest`
 
-### make Event to push information to browser:
+### make Events to push information to browser:
 * `php artisan make:event SocketMessage`
+* `php artisan make:event GroupDeleted`
 
 
-### make Observers for offline jobs:
+### make Observers and Jobs:
 * `php artisan make:observer MessageObserver`
+* `php artisan make:job DeleteGroupJob`
 
 ### Other stuff
 

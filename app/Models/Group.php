@@ -79,7 +79,7 @@ class Group extends Model
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'description' => $this->name,
+            'description' => $this->description,
             'is_group' => true,
             'is_user' => false,
             'owner_id' => $this->owner_id,
