@@ -41,6 +41,7 @@ _Run migrations and DB seeders:_
 * `php artisan make:controller HomeController`
 * `php artisan make:controller MessageController`
 * `php artisan make:controller GroupController --requests --resource --model=Group`
+* `php artisan make:controller UserController`
 
 ### Model Resources:
 * `php artisan make:resource UserResource`
@@ -50,6 +51,9 @@ _Run migrations and DB seeders:_
 
 ### Model Request classes:
 * `php artisan make:request StoreMessageRequest`
+
+### Access controll Middleware:
+* `php artisan make:middleware AdminUser`
 
 ### make Events to push information to browser:
 * `php artisan make:event SocketMessage`
