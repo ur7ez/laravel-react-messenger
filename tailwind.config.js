@@ -36,7 +36,7 @@ export default {
 
     // daisyUI config (optional - here are the default values)
     daisyui: {
-        themes: ["dark", "forest"], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
+        themes: ["dark", ], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
         darkTheme: "dark", // name of one of the included themes for dark mode
     },
 };

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 
 /**
  *
@@ -106,6 +107,7 @@ class User extends Authenticatable
     {
         return [
             'id' => $this->id,
+            'avatar_url' => $this->avatar_url,
             'name' => $this->name,
             'is_group' => false,
             'is_user' => true,
@@ -134,5 +136,10 @@ class User extends Authenticatable
     public function groups(): BelongsToMany
     {
         return $this->belongsToMany(Group::class, 'group_users', 'user_id', 'group_id');
+    }
+
+    public function getAvatarUrlAttribute ($value): ?string
+    {
+        return $this->avatar ? Storage::url($this->avatar) : null;
     }
 }
