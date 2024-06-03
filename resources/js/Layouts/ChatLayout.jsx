@@ -43,7 +43,7 @@ const ChatLayout = ({children}) => {
                 if ( // message is for group
                     message.group_id
                     && u.is_group
-                    && u.id == message.is_group
+                    && u.id == message.group_id
                 ) {
                     u.last_message = message.message;
                     u.last_message_date = message.created_at;
@@ -73,7 +73,7 @@ const ChatLayout = ({children}) => {
             });
 
             emit("toast.show", `Group "${name}" was deleted successfully`);
-
+            console.log("selectedConversation", selectedConversation);
             if (
                 !selectedConversation
                 || (
@@ -161,7 +161,7 @@ const ChatLayout = ({children}) => {
                         My Conversations
                         <div className="tooltip tooltip-left" data-tip="Create new Group">
                             <button
-                                onClick={ev => setShowGroupModal(true)}
+                                onClick={(ev) => setShowGroupModal(true)}
                                 className="text-gray-400 hover:text-gray-200"
                             >
                                 <PencilSquareIcon className="w-4 h-4 inline-block ml-2"/>

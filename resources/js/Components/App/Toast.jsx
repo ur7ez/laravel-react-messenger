@@ -18,7 +18,7 @@ export default function Toast ({}) {
     }, [on])
 
     return (
-        <div className="toast">
+        <div className="toast w-full xs:w-auto text-balance">
             {toasts.map((toast) => (
                 <div
                     key={toast.uuid}

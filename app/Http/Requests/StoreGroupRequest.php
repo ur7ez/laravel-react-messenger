@@ -25,7 +25,7 @@ class StoreGroupRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:255'],
             'user_ids' => ['nullable', 'array'],
-            'user_ids.' => ['integer', 'exists:users,id'],
+            'user_ids.*' => ['integer', 'exists:users,id'],
         ];
     }
 
