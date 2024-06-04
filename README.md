@@ -66,8 +66,12 @@ _Run migrations and DB seeders:_
 
 ### Other stuff
 
-To start Laravel Reverb server run:
-`php artisan reverb:start --debug`
+run Laravel server & Vite server:
+* `php artisan serve`
+* `npm run dev`
+
+start Laravel Reverb server:
+* `php artisan reverb:start --debug`
 
 **_Optional_**. Add IDE Helper Generator for Laravel
 Run commands:
