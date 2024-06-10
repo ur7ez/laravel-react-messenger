@@ -1,6 +1,8 @@
 ## About
 
-Real Time Messaging application for learning purposes. Based on tutor video from the best Laravel tutorials YT Channel
+Real time messaging application for learning purposes. Uses Laravel 11 with Breeze starter kit and React and Tailwindcss for frontend. Laravel Reverb is used as a choice for Web Socket server.
+
+Based on tutor video from the best Laravel tutorials YT Channel
 **_[The Codeholic](https://www.youtube.com/@TheCodeholic)_**.
 
 ## Installing kit and dependencies
@@ -18,11 +20,16 @@ _Adding extra packages_:
 * `npm install @headlessui/react @heroicons/react emoji-picker-react react-markdown uuid`
 * `npm install -D daisyui`
 
-_Install laravel broadcasting server with Laravel Reverb and Node dependencies_ (hit yes when asked):
-* `php artisan install:broadcasting`
+_Install broadcasting server with Laravel Reverb and Node dependencies_ (hit `yes` when asked).
+* `php artisan install:broadcasting --force`
+
+_Note_: if used a cloned project, be sure to copy `routes\channels.php` before, and replace newly generated file with contents from VCS. Also, you need to set `BROADCAST_CONNECTION=reverb` in `.env` file.
 
 _Set link to public storage_:
 * `php artisan storage:link`
+
+_Generate application key (if used a clone)_:
+* `php artisan key:generate`
 
 ### App Models & Migrations:
 * `php artisan make:model Group -m`
