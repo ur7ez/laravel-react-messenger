@@ -61,6 +61,7 @@ _Run migrations and DB seeders:_
 
 ### Access controll Middleware:
 * `php artisan make:middleware AdminUser`
+* `php artisan make:middleware ActiveUser`
 
 ### make Events to push information to browser:
 * `php artisan make:event SocketMessage`
