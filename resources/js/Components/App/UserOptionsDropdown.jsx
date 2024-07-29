@@ -6,8 +6,10 @@ import {
     UserIcon,
     ShieldCheckIcon
 } from "@heroicons/react/24/solid";
+import {useEventBus} from "@/EventBus.jsx";
 
 export default function UserOptionsDropdown({conversation}) {
+    const {emit} = useEventBus();
     const changeUserRole = () => {
         console.log('Change user role');
         if (!conversation.is_user) {
@@ -17,7 +19,7 @@ export default function UserOptionsDropdown({conversation}) {
         axios
             .post(route("user.changeRole", conversation.id))
             .then((res) => {
-                console.log(res.data);
+                emit('toast.show', res.data.message);
             })
             .catch((err) => {
                 console.log(err);
@@ -32,7 +34,7 @@ export default function UserOptionsDropdown({conversation}) {
         axios
             .post(route("user.blockUnblock", conversation.id))
             .then((res) => {
-                console.log(res.data);
+                emit('toast.show', res.data.message);
             })
             .catch((err) => {
                 console.log(err);
@@ -83,7 +85,7 @@ export default function UserOptionsDropdown({conversation}) {
                                 )}
                             </MenuItem>
                         </div>
-                        <div className="px-1 py-1">
+                        <div className="px-1 pb-1">
                             <MenuItem>
                                 {({active}) => (
                                     <button
