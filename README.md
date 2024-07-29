@@ -63,10 +63,17 @@ _Run migrations and DB seeders:_
 * `php artisan make:middleware AdminUser`
 * `php artisan make:middleware ActiveUser`
 
+### Make mailable classes:
+* `php artisan make:mail UserCreated`
+* `php artisan make:mail UserBlockedUnblocked`
+* `php artisan make:mail UserRoleChanged`
+
 ### make Events to push information to browser:
 * `php artisan make:event SocketMessage`
 * `php artisan make:event GroupDeleted`
 
+### Customize Markdown mail components:
+`php artisan vendor:publish --tag=laravel-mail`
 
 ### make Observers and Jobs:
 * `php artisan make:observer MessageObserver`
